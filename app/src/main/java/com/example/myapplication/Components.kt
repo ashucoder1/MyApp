@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
@@ -23,10 +24,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
@@ -59,8 +58,7 @@ fun TextComponentPreview(){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TextFieldComponent(
-){
+fun TextFieldComponent(text:String){
     var currentValue by remember {
         mutableStateOf("")
     }
@@ -76,6 +74,9 @@ fun TextFieldComponent(
                 fontSize = 18.sp
             )
         },
+        label={
+              Text(text = text)
+        },
         textStyle = TextStyle.Default.copy(fontSize =24.sp),
         keyboardOptions = KeyboardOptions(
             imeAction = ImeAction.Done
@@ -87,19 +88,19 @@ fun TextFieldComponent(
 @Preview(showBackground = true)
 @Composable
 fun TextFieldComponentPreview(){
-    TextFieldComponent()
+    TextFieldComponent("Label Text")
 }
 
 
 @Composable
-fun ButtonComponent(){
+fun ButtonComponent(textValue:String){
     Button(
         modifier = Modifier.fillMaxWidth(),
         onClick = {
         }
 
     ) {
-        TextComponent(textValue = "Go to Details Screen !",
+        TextComponent(textValue = textValue + "!",
             textSize = 18.sp,
             colorValue = Color.White,
             fontWeight = FontWeight.Light)
@@ -109,7 +110,7 @@ fun ButtonComponent(){
 @Preview
 @Composable
 fun ButtonComponentPreview(){
-    ButtonComponent()
+    ButtonComponent("Button Text")
 }
 
 @Composable
@@ -168,8 +169,8 @@ fun FactsComposablePreview(){
 
 @Composable
 fun BackgroundShape(topStart: Float, topEnd: Float, bottomEnd: Float , bottomStart: Float ){
-    Box(modifier=Modifier
-        .size(300.dp,100.dp)
+    Box(modifier= Modifier
+        .size(300.dp, 100.dp)
         .clip(
             shape = RoundedCornerShape(
                 topStart = topStart,
@@ -178,15 +179,14 @@ fun BackgroundShape(topStart: Float, topEnd: Float, bottomEnd: Float , bottomSta
                 bottomStart = bottomStart
             )
         )
-        .background(Color.Green)
+        .background(Color.Cyan)
     ){
-
 }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun BackgroundShapePreview(){
-    BackgroundShape(topStart= 10.0f, topEnd = 20.0f,
-    bottomEnd= 30.0f, bottomStart= 40.0f)
+    BackgroundShape(topStart= 0.0f, topEnd = 120.0f,
+    bottomEnd= 330.0f, bottomStart= 90.0f)
 }
