@@ -64,7 +64,7 @@ fun TextComponentPreview(){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TextFieldComponent(text:String){
+fun TextFieldComponent(text:String,placeholder:String){
     var currentValue by remember {
         mutableStateOf("")
     }
@@ -76,7 +76,7 @@ fun TextFieldComponent(text:String){
             currentValue=it
         },
         placeholder ={
-            Text(text = "Enter your name",
+            Text(text = placeholder,
                 fontSize = 18.sp
             )
         },
@@ -94,7 +94,7 @@ fun TextFieldComponent(text:String){
 @Preview(showBackground = true)
 @Composable
 fun TextFieldComponentPreview(){
-    TextFieldComponent("Label Text")
+    TextFieldComponent("Label Text","Name")
 }
 
 
@@ -176,7 +176,7 @@ fun FactsComposablePreview(){
 @Composable
 fun BackgroundShape(topStart: Float, topEnd: Float, bottomEnd: Float , bottomStart: Float ){
     Box(modifier= Modifier
-        .size(300.dp, 100.dp)
+        .size(300.dp, 110.dp)
         .clip(
             shape = RoundedCornerShape(
                 topStart = topStart,

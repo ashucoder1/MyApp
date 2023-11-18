@@ -44,11 +44,11 @@ fun SignUpScreen(){
             Column(modifier = Modifier.padding(18.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                TextFieldComponent("User Name")
+                TextFieldComponent("User Name","Enter your Name")
                 Spacer(Modifier.size(15.dp))
-                TextFieldComponent("Email")
+                TextFieldComponent("Email","Enter your email")
                 Spacer(Modifier.size(15.dp))
-                TextFieldComponent("Phone No")
+                TextFieldComponent("Phone No","Enter your Phone no")
                 Spacer(Modifier.size(15.dp))
                 ///OTP Field Here
                 Spacer(Modifier.size(15.dp))
