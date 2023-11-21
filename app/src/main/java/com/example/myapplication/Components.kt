@@ -1,25 +1,32 @@
 package com.example.myapplication
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,6 +39,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
@@ -39,14 +47,14 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.myapplication.ui.theme.Blue
 
 @Composable
-fun TextComponent(textValue:String,
-                  textSize: TextUnit,
-                  colorValue: Color = Color.Black,
+fun TextComponent(textValue:String, textSize: TextUnit, colorValue: Color = Color.Black,
                   fontWeight: FontWeight) {
     Text(text =textValue,
         fontSize=textSize,
@@ -101,7 +109,8 @@ fun TextFieldComponentPreview(){
 @Composable
 fun ButtonComponent(textValue:String){
     Button(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.wrapContentWidth(),
+        colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
         onClick = {
         }
 
@@ -185,7 +194,7 @@ fun BackgroundShape(topStart: Float, topEnd: Float, bottomEnd: Float , bottomSta
                 bottomStart = bottomStart
             )
         )
-        .background(Color.Cyan)
+        .background(Color.Blue)
     ){
 }
 }
@@ -216,6 +225,24 @@ fun CheckBoxText(text: String,horizontalArrangement: Arrangement.Horizontal){
 @Composable
 fun CheckBoxTextPreview(){
     CheckBoxText("Checked Box",Arrangement.Start)
+}
+
+@Composable
+fun ImageBox(resource_id:Int,width:Dp,height:Dp){
+    Box(modifier = Modifier.size(width,height)
+        .background(MaterialTheme.colorScheme.primary, CircleShape)
+        .clip(CircleShape)){
+        Image(painter = painterResource(id = resource_id), contentDescription = null ,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(4.dp))
+    }
+}
+
+@Preview
+@Composable
+fun ImageBoxPreview(){
+    ImageBox(R.drawable.temp_logo,100.dp,100.dp)
 }
 
 
