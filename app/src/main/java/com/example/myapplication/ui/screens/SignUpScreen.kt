@@ -17,14 +17,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.myapplication.BackgroundShape
 import com.example.myapplication.ButtonComponent
 import com.example.myapplication.CheckBoxText
+import com.example.myapplication.Screen
 import com.example.myapplication.TextComponent
 import com.example.myapplication.TextFieldComponent
 
 @Composable
-fun SignUpScreen(){
+fun SignUpScreen(navController: NavController){
     Surface(modifier = Modifier.fillMaxSize()){
         //column or row padding should be 18dp
         Column(modifier = Modifier.padding(0.dp,18.dp,0.dp,0.dp)) {
@@ -61,7 +64,9 @@ fun SignUpScreen(){
                     }
                 }
                 Spacer(Modifier.size(15.dp))
-                ButtonComponent("Sign Up")
+                ButtonComponent("Sign Up") {
+                    navController.navigate(Screen.Login.route)
+                }
                 Spacer(Modifier.size(35.dp))
                 Row(
                     horizontalArrangement = Arrangement.Center
@@ -82,5 +87,5 @@ fun SignUpScreen(){
 @Preview
 @Composable
 fun SignUpScreenPreview(){
-    SignUpScreen()
+    SignUpScreen(rememberNavController())
 }

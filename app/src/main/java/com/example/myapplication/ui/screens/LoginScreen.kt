@@ -15,13 +15,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.myapplication.BackgroundShape
 import com.example.myapplication.ButtonComponent
+import com.example.myapplication.Screen
 import com.example.myapplication.TextComponent
 import com.example.myapplication.TextFieldComponent
 
 @Composable
-fun LoginScreen(){
+fun LoginScreen(navController: NavController){
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.padding(0.dp,18.dp,0.dp,0.dp)) {
             BackgroundShape(topStart = 30f, topEnd = 90f, bottomEnd = 320f, bottomStart = 30f)
@@ -43,7 +46,9 @@ fun LoginScreen(){
             Spacer(Modifier.size(15.dp))
             /////otp
             Spacer(modifier = Modifier.size(24.dp))
-            ButtonComponent(textValue = "Login")
+            ButtonComponent(textValue = "Login",{
+                navController.navigate(Screen.Main.route)
+            })
             Spacer(Modifier.size(35.dp))
             Row(
                 horizontalArrangement = Arrangement.Center
@@ -63,5 +68,5 @@ fun LoginScreen(){
 @Preview
 @Composable
 fun LoginScreenPreview(){
-    LoginScreen()
+    LoginScreen(rememberNavController())
 }

@@ -10,12 +10,14 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.myapplication.NavigationSideBar
 import com.example.myapplication.items
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(){
+fun MainScreen(navController: NavController){
     var selectedItemIndex by rememberSaveable {
         mutableStateOf(0)
     }
@@ -33,5 +35,5 @@ fun MainScreen(){
 @Preview
 @Composable
 fun MainScreenPreview(){
-    MainScreen()
+    MainScreen(rememberNavController())
 }

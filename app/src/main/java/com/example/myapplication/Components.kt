@@ -3,6 +3,7 @@ package com.example.myapplication
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -106,12 +107,12 @@ fun TextFieldComponentPreview(){
 
 
 @Composable
-fun ButtonComponent(textValue:String){
+fun ButtonComponent(textValue:String,onClick:()->Unit){
     Button(
-        modifier = Modifier.wrapContentWidth(),
+        modifier = Modifier.wrapContentWidth()
+            .clickable(onClick=onClick),
         colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
-        onClick = {
-        }
+        onClick = onClick
 
     ) {
         TextComponent(textValue = textValue + "!",
@@ -124,7 +125,7 @@ fun ButtonComponent(textValue:String){
 @Preview
 @Composable
 fun ButtonComponentPreview(){
-    ButtonComponent("Button Text")
+    ButtonComponent("Button Text",{})
 }
 
 @Composable

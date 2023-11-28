@@ -12,21 +12,28 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.myapplication.ButtonComponent
 import com.example.myapplication.ImageBox
 import com.example.myapplication.R
+import com.example.myapplication.Screen
 
 @Composable
-fun FirstScreen(){
+fun FirstScreen(navController: NavController){
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.padding(18.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
             ImageBox(resource_id =  R.drawable.temp_logo, width = 100.dp, height = 100.dp)
             Spacer(modifier = Modifier.size(200.dp))
-            ButtonComponent(textValue = "Sign Up")
+            ButtonComponent(textValue = "Sign Up") {
+                navController.navigate(Screen.SignUp.route)
+            }
             Spacer(modifier = Modifier.size(50.dp))
-            ButtonComponent(textValue = "Login")
+            ButtonComponent(textValue = "Login") {
+                navController.navigate(Screen.Login.route)
+            }
         }
 
     }
@@ -37,5 +44,5 @@ fun FirstScreen(){
 @Preview
 @Composable
 fun FirstScreenPreview(){
-    FirstScreen()
+    FirstScreen(navController = rememberNavController())
 }
