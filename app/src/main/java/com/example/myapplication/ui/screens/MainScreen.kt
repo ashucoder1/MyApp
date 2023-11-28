@@ -22,7 +22,7 @@ fun MainScreen(){
 
     Surface(modifier = Modifier
         .fillMaxSize()) {
-        HomeScreen()
+        MemoryScreen()
     }
     //Rails
     NavigationSideBar(items = items,

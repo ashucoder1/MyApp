@@ -1,8 +1,8 @@
 package com.example.myapplication
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,12 +13,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -28,6 +29,7 @@ import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -39,9 +41,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.Shadow
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -51,7 +51,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.myapplication.ui.theme.Blue
 
 @Composable
 fun TextComponent(textValue:String, textSize: TextUnit, colorValue: Color = Color.Black,
@@ -150,7 +149,7 @@ fun TextWithShadowPreview(){
 @Composable
 fun FactsComposable(value: String){
     Card(modifier= Modifier
-        .padding(32.dp)
+        .padding(18.dp)
         .fillMaxWidth(),
         shape = RoundedCornerShape(8.dp),
         elevation = CardDefaults.cardElevation(6.dp)
@@ -161,11 +160,11 @@ fun FactsComposable(value: String){
 //                modifier = Modifier
 //                    .size(24.dp)
 //            )
-            Spacer(modifier = Modifier.size(24.dp))
+            Spacer(modifier = Modifier.size(8.dp))
 
             TextWithShadow(value = value)
 
-            Spacer(modifier = Modifier.size(24.dp))
+            Spacer(modifier = Modifier.size(8.dp))
 
 //            Image(painter = painterResource(id = R.drawable.comma)  ,
 //                contentDescription = "rev comma",
@@ -229,7 +228,8 @@ fun CheckBoxTextPreview(){
 
 @Composable
 fun ImageBox(resource_id:Int,width:Dp,height:Dp){
-    Box(modifier = Modifier.size(width,height)
+    Box(modifier = Modifier
+        .size(width, height)
         .background(MaterialTheme.colorScheme.primary, CircleShape)
         .clip(CircleShape)){
         Image(painter = painterResource(id = resource_id), contentDescription = null ,
@@ -244,6 +244,141 @@ fun ImageBox(resource_id:Int,width:Dp,height:Dp){
 fun ImageBoxPreview(){
     ImageBox(R.drawable.temp_logo,100.dp,100.dp)
 }
+
+@Composable
+fun ProfileTopCard(){
+    Card(
+        modifier= Modifier
+            .padding(18.dp)
+            .fillMaxWidth(),
+        shape = RoundedCornerShape(0.dp,0.dp,24.dp,24.dp),
+        elevation = CardDefaults.cardElevation(6.dp)
+    ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Row(modifier = Modifier
+                .padding(18.dp)
+                .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween) {
+                TextComponent(textValue = "UserId", textSize = 18.sp, fontWeight = FontWeight.Medium)
+                Image(imageVector = Icons.Default.Edit, contentDescription = "EditProfile")
+            }
+            Row(modifier = Modifier
+                .padding(18.dp)
+                .fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+            ) {
+                ImageBox(resource_id = R.drawable.temp_logo,
+                    width =100.dp ,
+                    height =100.dp )
+            }
+            TextComponent(textValue = "UserName", textSize = 24.sp, fontWeight = FontWeight.Bold)
+            Row(horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(18.dp, 8.dp)
+                    .fillMaxWidth()) {
+                    TextWithShadow(value = "clap :1000")
+                    TextWithShadow(value = "followers :1200")
+            }
+
+        }
+        
+    }
+}
+
+@Preview
+@Composable
+fun ProfileTopCardPreview(){
+    ProfileTopCard()
+}
+
+@Composable
+fun ProfileBottomCard(){
+    Card(
+        modifier= Modifier
+            .padding(18.dp)
+            .fillMaxWidth(),
+        shape = RoundedCornerShape(24.dp,24.dp,0.dp,0.dp),
+        elevation = CardDefaults.cardElevation(6.dp)
+    ){
+        Column(modifier = Modifier.padding(18.dp),
+            verticalArrangement = Arrangement.Top) {
+            TextComponent(textValue = "Pin", textSize = 18.sp, fontWeight = FontWeight.Normal)
+            LazyRow(modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 0.dp, 18.dp)){
+                items(20){
+                    ImageBox(resource_id = R.drawable.temp_logo, width = 40.dp, height = 40.dp)
+                    Spacer(modifier = Modifier.width(18.dp))
+
+                }
+            }
+
+        }
+
+    }
+}
+
+@Preview
+@Composable
+fun ProfileBottomCardPreview(){
+    ProfileBottomCard()
+}
+
+@Composable
+fun MemoryComponent(){
+    Card(
+        modifier= Modifier
+            .padding(18.dp)
+            .fillMaxWidth(),
+        shape = RoundedCornerShape(24.dp,24.dp,0.dp,0.dp),
+        elevation = CardDefaults.cardElevation(6.dp)
+    ){
+        Column(modifier = Modifier.padding(18.dp),
+            verticalArrangement = Arrangement.Top) {
+            TextComponent(textValue = "Memory", textSize = 18.sp, fontWeight = FontWeight.Normal)
+            LazyRow(modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 0.dp, 18.dp)){
+                items(20){
+                    Column(modifier=Modifier,
+                        horizontalAlignment = Alignment.CenterHorizontally) {
+                        ImageBox(resource_id = R.drawable.temp_logo, width = 40.dp, height = 40.dp)
+                        TextComponent(textValue = "username", textSize = 18.sp, fontWeight = FontWeight.Light)
+                    }
+                    Spacer(modifier = Modifier.width(18.dp))
+                }
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+fun MemoryComponentPreview(){
+    MemoryComponent()
+}
+
+@Composable
+fun RoomCard(){
+    Box(modifier = Modifier
+        .padding(8.dp)
+        .border(2.dp, Color.Black, RoundedCornerShape(8.dp)),
+        contentAlignment = Alignment.Center){
+        Column(modifier=Modifier.padding(18.dp),
+            horizontalAlignment = Alignment.CenterHorizontally) {
+            ImageBox(resource_id = R.drawable.temp_logo, width = 50.dp, height = 50.dp)
+            Spacer(modifier = Modifier.size(4.dp))
+            TextComponent(textValue = "room", textSize = 18.sp, fontWeight = FontWeight.Light)
+        }
+    }
+}
+
+@Preview
+@Composable
+fun RoomCardPreview(){
+    RoomCard()
+}
+
 
 
 
